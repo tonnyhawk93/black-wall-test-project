@@ -1,0 +1,10 @@
+.item {
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &.active {
+    color: white;
+    background-color: rgb(249, 166, 180);
+  }
+}
