@@ -1,35 +1,30 @@
-import React, { useState } from "react";
-import { CurrencyInput, Filters } from "..";
-import { CURRENCIES, FILTERS, FILTERS_MAP } from "../../constants";
+import React, { useEffect, useCallback} from "react";
+import { setFrom, fetchData } from "../../store/exchangerSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { CurrencyInputWithFilters } from "..";
 import style from "./style.module.scss";
 
-const [DEFAULT_FILTER] = FILTERS;
+const Exchanger = () => {
+  const dispatch = useDispatch();
+  const currenciesFrom = useSelector((state) => state.exchanger.currenciesFrom);
+  const currenciesTo = useSelector((state) => state.exchanger.currenciesTo);
+  const selectCurrency = useCallback((currency) => dispatch(setFrom(currency)), [dispatch])
 
-const filterList = (cyrrencyList, filter) => {
-  if (filter === DEFAULT_FILTER) return cyrrencyList;
-
-  const filterName = FILTERS_MAP[filter];
-  const currenciesNeaded = CURRENCIES[filterName];
-
-  return cyrrencyList.filter((cyrrency) => currenciesNeaded.includes(cyrrency));
-};
-
-const Exchanger = ({
-  selectCurrency,
-  cyrrencyList = [...Object.values(CURRENCIES)].flat(),
-}) => {
-  const [filter, setFilter] = useState(DEFAULT_FILTER);
+  useEffect(() => {
+    dispatch(fetchData());
+  }, []);
 
   return (
     <div className={style.container}>
-      <Filters
-        onSelect={setFilter}
-        filtersList={FILTERS}
-        activeFilter={filter}
-      />
-      <CurrencyInput
-        cyrrencyList={filterList(cyrrencyList, filter)}
+      <div className={style.title}>Отдаёте</div>
+      <CurrencyInputWithFilters
+        cyrrencyList={currenciesFrom}
         selectCurrency={selectCurrency}
+      />
+      <div className={style.title}>Получаете</div>
+      <CurrencyInputWithFilters
+        cyrrencyList={currenciesTo}
+        selectCurrency={() => {}}
       />
     </div>
   );

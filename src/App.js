@@ -1,12 +1,11 @@
 import './App.css';
-import { CurrencyInputWithFilters } from './components';
+import { Exchanger } from './components';
 
 function App() {
   return (
     <>
-      <CurrencyInputWithFilters />
+      <Exchanger />
     </>
-
   );
 }
 

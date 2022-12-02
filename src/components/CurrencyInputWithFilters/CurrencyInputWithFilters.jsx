@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CurrencyInput, Filters } from "../";
 import { CURRENCIES, FILTERS, FILTERS_MAP } from "../../constants";
 import style from "./style.module.scss";
@@ -11,14 +11,17 @@ const filterList = (cyrrencyList, filter) => {
   const filterName = FILTERS_MAP[filter];
   const currenciesNeaded = CURRENCIES[filterName];
 
-  return cyrrencyList.filter((cyrrency) => currenciesNeaded.includes(cyrrency));
+  return cyrrencyList.filter((cyrrency) =>
+    currenciesNeaded.includes(cyrrency.code)
+  );
 };
 
-const CurrencyInputWithFilters = ({
-  selectCurrency,
-  cyrrencyList = [...Object.values(CURRENCIES)].flat(),
-}) => {
+const CurrencyInputWithFilters = ({ selectCurrency, cyrrencyList }) => {
   const [filter, setFilter] = useState(DEFAULT_FILTER);
+
+  useEffect(() => {
+    setFilter(DEFAULT_FILTER);
+  }, [cyrrencyList]);
 
   return (
     <div className={style.container}>
