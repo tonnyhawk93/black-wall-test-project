@@ -6,16 +6,18 @@
   justify-content: flex-start;
   gap: 10px;
   width: 500px;
+  padding: 10px;
+  border: 1px black solid;
 }
 
-.devider {
+.divider {
   display: flex;
   justify-content: flex-end;
 
   svg {
     height: 30px;
     width: 30px;
-    transform: rotate(90deg) translateX(17px);
+    transform: rotate(90deg) translateX(33px);
     fill: $mainColor;
   }
 }

@@ -31,9 +31,10 @@ const Exchanger = () => {
         currencyList={currenciesFrom}
         selectCurrency={selectCurrencyFrom}
       />
-      <div className={style.devider}>
+      <div className={style.divider}>
         <ExchangeIcon />
       </div>
+      <div className={style.title}>Получаете</div>
       <CurrencyInputWithFilters
         currencyList={currenciesTo}
         selectCurrency={selectCurrencyTo}
