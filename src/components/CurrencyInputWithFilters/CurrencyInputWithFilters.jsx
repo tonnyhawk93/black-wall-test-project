@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { CurrencyInput, Filters } from "../";
 import {
   CURRENCIES,
-  FILTERS,
-  FILTERS_MAP,
-  DEFAULT_FILTER,
+  CATEGORIES,
+  CATEGORIES_MAP,
+  DEFAULT_CATEGORY,
 } from "../../constants";
 import style from "./style.module.scss";
 
-const filterList = (currencyList, filter) => {
-  if (filter === DEFAULT_FILTER) return currencyList;
+const filterCurrencies = (currencyList, filter) => {
+  if (filter === DEFAULT_CATEGORY) return currencyList;
 
-  const filterName = FILTERS_MAP[filter];
+  const filterName = CATEGORIES_MAP[filter];
   const currenciesNeaded = CURRENCIES[filterName];
 
   return currencyList.filter((currency) =>
@@ -19,19 +19,26 @@ const filterList = (currencyList, filter) => {
   );
 };
 
-const CurrencyInputWithFilters = ({ selectCurrency, currencyList }) => {
-  const [filter, setFilter] = useState(DEFAULT_FILTER);
-  const filtersList = FILTERS.filter((filter) => {
-    if (filter === DEFAULT_FILTER) return true;
+const filterCategories = (currencyList) => {
+  return CATEGORIES.filter((category) => {
+    if (category === DEFAULT_CATEGORY) return true;
 
-    const filtersCode = FILTERS_MAP[filter];
-    const filtersCurrencies = CURRENCIES[filtersCode];
+    const categoryCode = CATEGORIES_MAP[category];
+    const categoriesCurrencies = CURRENCIES[categoryCode];
 
-    return currencyList.some(({ code }) => filtersCurrencies.includes(code));
+    return currencyList.some(({ code }) => categoriesCurrencies.includes(code));
   });
+};
+
+const CurrencyInputWithFilters = ({ selectCurrency, currencyList }) => {
+  const [filter, setFilter] = useState(DEFAULT_CATEGORY);
+  const filtersList = useMemo(
+    () => filterCategories(currencyList),
+    [currencyList]
+  );
 
   useEffect(() => {
-    setFilter(DEFAULT_FILTER);
+    setFilter(DEFAULT_CATEGORY);
   }, [currencyList]);
 
   return (
@@ -42,7 +49,7 @@ const CurrencyInputWithFilters = ({ selectCurrency, currencyList }) => {
         activeFilter={filter}
       />
       <CurrencyInput
-        currencyList={filterList(currencyList, filter)}
+        currencyList={filterCurrencies(currencyList, filter)}
         selectCurrency={selectCurrency}
       />
     </div>

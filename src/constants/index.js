@@ -4,11 +4,11 @@ export const CURRENCIES = {
   CASH: ["CASHUSD", "CASHRUB"],
 }
 
-export const FILTERS = ["Все", "Криптовалюты", "Наличные", "Банки"];
+export const CATEGORIES = ["Все", "Криптовалюты", "Наличные", "Банки"];
 
-export const [DEFAULT_FILTER] = FILTERS;
+export const [DEFAULT_CATEGORY] = CATEGORIES;
 
-export const FILTERS_MAP = {
+export const CATEGORIES_MAP = {
   "Все": "ALL",
   "Криптовалюты": "CRYPTO",
   "Наличные": "CASH",
