@@ -6,6 +6,8 @@ export const CURRENCIES = {
 
 export const FILTERS = ["Все", "Криптовалюты", "Наличные", "Банки"];
 
+export const [DEFAULT_FILTER] = FILTERS;
+
 export const FILTERS_MAP = {
   "Все": "ALL",
   "Криптовалюты": "CRYPTO",

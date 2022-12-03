@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { Exchanger } from './components';
 
 function App() {

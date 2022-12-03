@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
 
-const CurrencyInput = ({ selectCurrency, cyrrencyList = [] }) => {
-  const [defaultCyrrency] = cyrrencyList;
-  const [selected, setSelected] = useState(defaultCyrrency?.code);
+const CurrencyInput = ({ selectCurrency, currencyList = [] }) => {
+  const [defaultCurrency] = currencyList;
+  const [selected, setSelected] = useState(defaultCurrency?.code);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -13,18 +13,17 @@ const CurrencyInput = ({ selectCurrency, cyrrencyList = [] }) => {
   };
 
   useEffect(() => {
-    if (defaultCyrrency) {
-      console.log("defaultCyrrency");
-      setSelected(defaultCyrrency.code);
-      selectCurrency(defaultCyrrency.code);
+    if (defaultCurrency?.code) {
+      setSelected(defaultCurrency.code);
+      selectCurrency(defaultCurrency.code);
     }
-  }, [defaultCyrrency, selectCurrency]);
+  }, [defaultCurrency?.code, selectCurrency]);
 
   return (
     <div className={style.container}>
       <input type="number" />
       <select name="select" onChange={handleChange} value={selected}>
-        {cyrrencyList.map(({ name, code }) => (
+        {currencyList.map(({ name, code }) => (
           <option value={code} key={code}>
             {name}
           </option>

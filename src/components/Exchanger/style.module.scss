@@ -1,12 +1,27 @@
+@import "../../variables";
+
 .container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 10px;
+  width: 500px;
+}
+
+.devider {
+  display: flex;
+  justify-content: flex-end;
+
+  svg {
+    height: 30px;
+    width: 30px;
+    transform: rotate(90deg) translateX(17px);
+    fill: $mainColor;
+  }
 }
 
 .title {
   font-size: 20px;
   font-weight: 600;
-  color: rgb(249, 166, 180);
+  color: $mainColor;
 }

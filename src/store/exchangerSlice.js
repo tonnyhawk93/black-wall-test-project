@@ -27,6 +27,10 @@ const exchangerSlice = createSlice({
       state.from = from;
       state.currenciesTo = state.directions.find(direction => direction.from.code === from).to || [];
     },
+
+    setTo: (state, action) => {
+      state.to = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -39,6 +43,6 @@ const exchangerSlice = createSlice({
   },
 });
 
-export const { setFrom } = exchangerSlice.actions;
+export const { setFrom, setTo } = exchangerSlice.actions;
 
 export default exchangerSlice.reducer;
